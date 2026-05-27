@@ -73,7 +73,7 @@ export default function LandingPage() {
               {icon:'🎨', title:'Pixel-perfect rendering', body:'Powered by Chromium — the same engine your users see in Chrome. CSS, fonts, images all render correctly.'},
               {icon:'📐', title:'Full layout control', body:'A4, Letter, custom page sizes. Configurable margins, orientation, scale, headers, and footers.'},
               {icon:'🔑', title:'API key auth', body:'Simple Bearer token auth. Create, rotate, and revoke keys from the dashboard with one click.'},
-              {icon:'📊', title:'Usage dashboard', body:'See exactly how many PDFs you've rendered this month. Know before you hit a limit.'},
+              {icon:'📊', title:'Usage dashboard', body:'See exactly how many PDFs you have rendered this month. Know before you hit a limit.'},
               {icon:'⚙️', title:'Async webhooks', body:'For large documents, fire-and-forget. We call your webhook URL when the PDF is ready.'},
             ].map(f => (
               <div key={f.title} style={{background:'#fff',border:'1px solid #E5E7EB',borderRadius:12,padding:'1.25rem'}}>
