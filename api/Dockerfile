@@ -1,23 +1,19 @@
-# ──────────────────────────────────────────────────────────────
-# Renderly API — Dockerfile
-# Uses the official Puppeteer image so Chromium is pre-installed
-# ──────────────────────────────────────────────────────────────
-FROM ghcr.io/puppeteer/puppeteer:22.15.0
+FROM node:20-bullseye-slim
 
-# Run as the non-root puppeteer user that ships with the image
-USER pptruser
+RUN apt-get update && apt-get install -y \
+    chromium fonts-liberation libasound2 libatk-bridge2.0-0 \
+    libatk1.0-0 libcups2 libdbus-1-3 libdrm2 libgbm1 libgtk-3-0 \
+    libnspr4 libnss3 libx11-xcb1 libxcomposite1 libxdamage1 \
+    libxrandr2 xdg-utils --no-install-recommends \
+    && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /home/pptruser/app
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
 
-# Install production dependencies only
-COPY --chown=pptruser:pptruser package*.json ./
+WORKDIR /app
+COPY package*.json ./
 RUN npm ci --omit=dev
+COPY src/ ./src/
 
-# Copy source
-COPY --chown=pptruser:pptruser src/ ./src/
-
-# Expose port (Railway / Cloud Run will override via $PORT)
 EXPOSE 3001
-
-# Run migrations then start the server
 CMD ["sh", "-c", "node src/db/migrate.js && node src/server.js"]

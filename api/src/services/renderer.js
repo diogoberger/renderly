@@ -11,6 +11,7 @@ const RECYCLE_AFTER = 200; // restart browser every 200 renders to avoid memory 
 async function getBrowser() {
   if (!browserInstance || !browserInstance.connected) {
     browserInstance = await puppeteer.launch({
+      executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || undefined,
       headless: 'new',
       args: [
         '--no-sandbox',
