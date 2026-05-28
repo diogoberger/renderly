@@ -19,7 +19,12 @@ const app = Fastify({
 // ── CORS ─────────────────────────────────────────────────────────────────────
 app.register(cors, {
   origin:  process.env.NODE_ENV === 'production'
-    ? [process.env.DASHBOARD_URL ?? 'https://renderly.dev']
+    ? [
+        process.env.DASHBOARD_URL ?? 'https://renderlyapi.com',
+        'https://renderlyapi.com',
+        'https://www.renderlyapi.com',
+        'https://docs.renderlyapi.com',
+      ]
     : true,
   methods: ['GET', 'POST', 'DELETE', 'OPTIONS'],
 });
@@ -32,6 +37,7 @@ app.register(require('./routes/keys'));
 app.register(require('./routes/usage'));
 app.register(require('./routes/billing'));
 app.register(require('./routes/webhooks'));
+app.register(require('./routes/dashboard'));
 
 // ── 404 handler ──────────────────────────────────────────────────────────────
 app.setNotFoundHandler((req, reply) => {
