@@ -1,6 +1,6 @@
 'use strict';
 
-const bcrypt  = require('bcrypt');
+const bcrypt  = require('bcryptjs');
 const { nanoid } = require('nanoid');
 const { requireApiKey } = require('../middleware/auth');
 const { query, getAll, getOne } = require('../db/client');
