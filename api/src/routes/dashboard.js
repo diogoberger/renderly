@@ -63,6 +63,34 @@ async function dashboardRoutes(fastify) {
     );
     return { ok: true };
   });
+
+  // ── POST /v1/dashboard/checkout ──────────────────────────────────────────
+  fastify.post('/v1/dashboard/checkout', { preHandler: requireDashboardAuth }, async (req, reply) => {
+    const { plan } = req.body ?? {};
+    if (!['starter','pro','scale'].includes(plan)) {
+      return reply.status(400).send({ error: { code:'invalid_input', message:'Invalid plan.' } });
+    }
+    const priceIds = {
+      starter: process.env.STRIPE_PRICE_STARTER,
+      pro:     process.env.STRIPE_PRICE_PRO,
+      scale:   process.env.STRIPE_PRICE_SCALE,
+    };
+    const priceId = priceIds[plan];
+    if (!priceId) return reply.status(500).send({ error: { code:'config_error', message:'Price not configured.' } });
+
+    const { createCheckoutSession } = require('../services/billing');
+    try {
+      const url = await createCheckoutSession({
+        userId:  req.dashUser.id,
+        email:   req.dashUser.email,
+        priceId,
+      });
+      return { url };
+    } catch (err) {
+      fastify.log.error(err, 'checkout failed');
+      return reply.status(500).send({ error: { code:'internal_error', message:'Checkout failed.' } });
+    }
+  });
 }
 
 module.exports = dashboardRoutes;
