@@ -3,6 +3,7 @@ export default function LandingPage() {
     <>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+        html, body { background:#020817 !important; color:#F8FAFC !important; }
 
         * { box-sizing:border-box; margin:0; padding:0; }
         body { font-family:'Inter',system-ui,-apple-system,sans-serif; color:#F8FAFC; background:#020817; }
@@ -166,7 +167,7 @@ export default function LandingPage() {
               </div>
               <div className="demo-code">
                 <div><span className="kw">const</span> pdf = <span className="kw">await</span> fetch(</div>
-                <div style={{paddingLeft:16}}><span className="str">'https://api.renderly.dev</span></div>
+                <div style={{paddingLeft:16}}><span className="str">'https://api.renderlyapi.com</span></div>
                 <div style={{paddingLeft:16}}><span className="str">/v1/pdf/from-html'</span>,</div>
                 <div>{`  {`}</div>
                 <div style={{paddingLeft:16}}><span className="kw">method</span>: <span className="str">'POST'</span>,</div>
