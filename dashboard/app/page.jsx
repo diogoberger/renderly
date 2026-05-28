@@ -2,7 +2,6 @@ export default function LandingPage() {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
         html, body { background:#020817 !important; color:#F8FAFC !important; }
 
         * { box-sizing:border-box; margin:0; padding:0; }
