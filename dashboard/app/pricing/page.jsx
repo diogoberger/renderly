@@ -10,17 +10,17 @@ const plans = [
   },
   {
     name: 'Starter', price: 19, period: '/mo', docs: '500 PDFs/mo',
-    features: ['500 PDFs/month', '20MB max HTML', 'Custom headers & footers', 'Email support', 'Overage at $0.06/doc'],
+    features: ['500 PDFs/month', '20MB max HTML', 'Custom headers & footers', 'Email support', 'Overage at €0.06/doc'],
     cta: 'Upgrade to Starter', plan: 'starter', href: null, featured: false,
   },
   {
     name: 'Pro', price: 49, period: '/mo', docs: '2,000 PDFs/mo',
-    features: ['2,000 PDFs/month', '50MB max HTML', 'Async + webhooks', 'Priority rendering', '99.5% SLA', 'Overage at $0.04/doc'],
+    features: ['2,000 PDFs/month', '50MB max HTML', 'Async + webhooks', 'Priority rendering', '99.5% SLA', 'Overage at €0.04/doc'],
     cta: 'Upgrade to Pro', plan: 'pro', href: null, featured: true,
   },
   {
     name: 'Scale', price: 99, period: '/mo', docs: '10,000 PDFs/mo',
-    features: ['10,000 PDFs/month', '100MB max HTML', 'All Pro features', '99.9% SLA', 'Priority email support', 'Overage at $0.025/doc'],
+    features: ['10,000 PDFs/month', '100MB max HTML', 'All Pro features', '99.9% SLA', 'Priority email support', 'Overage at €0.025/doc'],
     cta: 'Upgrade to Scale', plan: 'scale', href: null, featured: false,
   },
 ];
@@ -120,7 +120,7 @@ export default function PricingPage() {
             <div key={p.name} className={`card${p.featured ? ' featured' : ''}`}>
               {p.featured && <div className="popular-badge">Most popular</div>}
               <div className="plan-name">{p.name}</div>
-              <div className="plan-price">${p.price}<span>{p.period}</span></div>
+              <div className="plan-price">€{p.price}<span>{p.period}</span></div>
               <div className="plan-docs">{p.docs}</div>
               <ul className="features">
                 {p.features.map(f => <li key={f}>{f}</li>)}

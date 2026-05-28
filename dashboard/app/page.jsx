@@ -283,14 +283,14 @@ export default function LandingPage() {
                 </div>
                 <div className="pdf-items">
                   <div className="pdf-item">
-                    <span>API Platform License</span><span>$1,200.00</span>
+                    <span>API Platform License</span><span>€1,200.00</span>
                   </div>
                   <div className="pdf-item">
-                    <span>Support Package</span><span>$300.00</span>
+                    <span>Support Package</span><span>€300.00</span>
                   </div>
                 </div>
                 <div className="pdf-total">
-                  <span>Total</span><span>$1,500.00</span>
+                  <span>Total</span><span>€1,500.00</span>
                 </div>
                 <div><span className="pdf-stamp">PAID</span></div>
               </div>
@@ -373,10 +373,10 @@ export default function LandingPage() {
           <p className="section-sub">Free forever for small projects. Upgrade when you need more.</p>
           <div className="pricing-grid">
             {[
-              {plan:'Free', price:'$0', period:'', docs:'50 PDFs/mo', features:['API key access','From-HTML endpoint','From-URL endpoint','Usage dashboard'], featured:false},
-              {plan:'Starter', price:'$19', period:'/mo', docs:'500 PDFs/mo', features:['Everything in Free','Priority rendering','Email support','Webhook callbacks'], featured:true},
-              {plan:'Pro', price:'$49', period:'/mo', docs:'2,000 PDFs/mo', features:['Everything in Starter','Custom headers/footers','Team API keys','SLA guarantee'], featured:false},
-              {plan:'Scale', price:'$99', period:'/mo', docs:'10,000 PDFs/mo', features:['Everything in Pro','Volume discounts','Dedicated support','Custom retention'], featured:false},
+              {plan:'Free', price:'€0', period:'', docs:'50 PDFs/mo', features:['API key access','From-HTML endpoint','From-URL endpoint','Usage dashboard'], featured:false},
+              {plan:'Starter', price:'€19', period:'/mo', docs:'500 PDFs/mo', features:['Everything in Free','Priority rendering','Email support','Webhook callbacks'], featured:true},
+              {plan:'Pro', price:'€49', period:'/mo', docs:'2,000 PDFs/mo', features:['Everything in Starter','Custom headers/footers','Team API keys','SLA guarantee'], featured:false},
+              {plan:'Scale', price:'€99', period:'/mo', docs:'10,000 PDFs/mo', features:['Everything in Pro','Volume discounts','Dedicated support','Custom retention'], featured:false},
             ].map(p => (
               <div className={`pricing-card${p.featured ? ' featured' : ''}`} key={p.plan}>
                 {p.featured && <div className="pricing-badge">Most popular</div>}

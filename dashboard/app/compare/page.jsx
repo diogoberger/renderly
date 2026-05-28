@@ -9,8 +9,8 @@ const competitors = [
     tagline: 'The simplest HTML→PDF API',
     engine: 'Chromium',
     free: '50/mo',
-    starter: '$19/mo',
-    pro: '$49/mo',
+    starter: '€19/mo',
+    pro: '€49/mo',
     setup: '30 seconds',
     modernCSS: true,
     sdkRequired: false,
@@ -150,7 +150,7 @@ export default function ComparePage() {
       <div className="container">
         <h1>Renderly vs the alternatives</h1>
         <p className="hero-sub">
-          You could self-host Puppeteer and own all the ops. Or pay $50+/month for tools built for enterprise. Or use Renderly — the simplest HTML to PDF API available.
+          You could self-host Puppeteer and own all the ops. Or pay €50+/month for tools built for enterprise. Or use Renderly — the simplest HTML to PDF API available.
         </p>
 
         {/* Comparison table */}

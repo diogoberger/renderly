@@ -194,7 +194,7 @@ export default function DocsPage() {
 
           <h3>Example</h3>
           <pre><code>{`{
-  "html": "<html><body style='font-family:sans-serif; padding:40px'><h1>Invoice #001</h1><p>Amount: $500</p></body></html>",
+  "html": "<html><body style='font-family:sans-serif; padding:40px'><h1>Invoice #001</h1><p>Amount: €500</p></body></html>",
   "format": "A4",
   "margin": { "top": "1cm", "right": "1cm", "bottom": "1cm", "left": "1cm" }
 }`}</code></pre>
@@ -311,10 +311,10 @@ export default function DocsPage() {
           <table className="plans-table">
             <thead><tr><th>Plan</th><th>PDFs / month</th><th>Max HTML size</th><th>Price</th></tr></thead>
             <tbody>
-              <tr><td>Free</td><td>50</td><td>5 MB</td><td>$0</td></tr>
-              <tr><td>Starter</td><td>500</td><td>20 MB</td><td>$19/mo</td></tr>
-              <tr><td>Pro</td><td>2,000</td><td>50 MB</td><td>$49/mo</td></tr>
-              <tr><td>Scale</td><td>10,000</td><td>100 MB</td><td>$99/mo</td></tr>
+              <tr><td>Free</td><td>50</td><td>5 MB</td><td>€0</td></tr>
+              <tr><td>Starter</td><td>500</td><td>20 MB</td><td>€19/mo</td></tr>
+              <tr><td>Pro</td><td>2,000</td><td>50 MB</td><td>€49/mo</td></tr>
+              <tr><td>Scale</td><td>10,000</td><td>100 MB</td><td>€99/mo</td></tr>
             </tbody>
           </table>
           <p><a href="/pricing">View full pricing details →</a></p>
@@ -346,9 +346,9 @@ export default function DocsPage() {
           <p class="meta">Acme Corp · May 28, 2026</p>
           <table>
             <tr><th>Item</th><th>Qty</th><th>Price</th></tr>
-            <tr><td>API Platform License</td><td>1</td><td>$1,200.00</td></tr>
-            <tr><td>Support Package</td><td>1</td><td>$300.00</td></tr>
-            <tr><td class="total">Total</td><td></td><td class="total">$1,500.00</td></tr>
+            <tr><td>API Platform License</td><td>1</td><td>€1,200.00</td></tr>
+            <tr><td>Support Package</td><td>1</td><td>€300.00</td></tr>
+            <tr><td class="total">Total</td><td></td><td class="total">€1,500.00</td></tr>
           </table>
         </body>
       </html>
