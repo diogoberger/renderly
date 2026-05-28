@@ -29,13 +29,15 @@ async function createCheckoutSession({ userId, email, priceId }) {
     await query('UPDATE users SET stripe_customer_id = $1 WHERE id = $2', [customerId, userId]);
   }
 
+  const baseUrl = (process.env.DASHBOARD_URL ?? 'https://renderlyapi.com').replace(/\/$/, '');
+
   const session = await stripe.checkout.sessions.create({
-    customer:            customerId,
+    customer:             customerId,
     payment_method_types: ['card'],
-    mode:                'subscription',
+    mode:                 'subscription',
     line_items: [{ price: priceId, quantity: 1 }],
-    success_url: `${process.env.DASHBOARD_URL}/dashboard?upgraded=1`,
-    cancel_url:  `${process.env.DASHBOARD_URL}/pricing`,
+    success_url: `${baseUrl}/dashboard?upgraded=1`,
+    cancel_url:  `${baseUrl}/pricing`,
     metadata:    { renderly_user_id: userId },
   });
 

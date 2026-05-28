@@ -88,7 +88,7 @@ async function dashboardRoutes(fastify) {
       return { url };
     } catch (err) {
       fastify.log.error(err, 'checkout failed');
-      return reply.status(500).send({ error: { code:'internal_error', message:'Checkout failed.' } });
+      return reply.status(500).send({ error: { code:'internal_error', message:'Checkout failed: ' + (err.message ?? 'unknown error') } });
     }
   });
 }
