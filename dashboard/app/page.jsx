@@ -1,4 +1,40 @@
+'use client';
+import { useEffect, useState } from 'react';
 import FAQSection from './components/FAQSection';
+
+function LiveStats() {
+  const [pdfs, setPdfs] = useState(null);
+
+  useEffect(() => {
+    fetch('/api/stats')
+      .then(r => r.json())
+      .then(d => setPdfs(d.pdfsRendered))
+      .catch(() => {});
+  }, []);
+
+  const fmt = n => n == null ? '…' : n.toLocaleString();
+
+  return (
+    <div className="stats-grid">
+      <div className="stat">
+        <div className="stat-num">{fmt(pdfs)}</div>
+        <div className="stat-label">PDFs rendered</div>
+      </div>
+      <div className="stat">
+        <div className="stat-num">{'< 200ms'}</div>
+        <div className="stat-label">Average render time</div>
+      </div>
+      <div className="stat">
+        <div className="stat-num">99.9%</div>
+        <div className="stat-label">API uptime</div>
+      </div>
+      <div className="stat">
+        <div className="stat-num">Free</div>
+        <div className="stat-label">To get started</div>
+      </div>
+    </div>
+  );
+}
 
 export default function LandingPage() {
   return (
@@ -118,11 +154,22 @@ export default function LandingPage() {
         .cta-section p { font-size:17px;color:#64748B;margin-bottom:36px; }
 
         /* Footer */
-        .footer { border-top:1px solid rgba(255,255,255,0.06);padding:2.5rem 0;background:#020817; }
-        .footer-inner { display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px; }
-        .footer-links { display:flex;gap:24px; }
+        .footer { border-top:1px solid rgba(255,255,255,0.06);padding:3rem 0;background:#020817; }
+        .footer-inner { display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:start; }
+        .footer-brand { display:flex;flex-direction:column;gap:8px; }
+        .footer-tagline { font-size:13px;color:#475569;margin-top:4px; }
+        .footer-cols { display:flex;gap:3rem;flex-wrap:wrap; }
+        .footer-col h4 { font-size:11px;font-weight:700;color:#64748B;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px; }
+        .footer-col-links { display:flex;flex-direction:column;gap:7px; }
         .footer-link { font-size:13px;color:#475569;text-decoration:none;transition:color 0.2s; }
         .footer-link:hover { color:#94A3B8; }
+        .footer-bottom { border-top:1px solid rgba(255,255,255,0.05);margin-top:2rem;padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px; }
+        .status-badge { display:inline-flex;align-items:center;gap:6px;font-size:12px;color:#64748B;text-decoration:none; }
+        .status-dot { width:7px;height:7px;border-radius:50%;background:#10B981; }
+
+        /* Demo CTA bar */
+        .demo-cta-bar { display:flex;align-items:center;gap:10px;justify-content:center;margin-top:24px;padding:14px 20px;background:rgba(99,102,241,0.07);border:1px solid rgba(99,102,241,0.2);border-radius:12px;max-width:480px;margin-left:auto;margin-right:auto; }
+        .demo-cta-bar span { font-size:14px;color:#94A3B8; }
 
         /* ── Mobile ────────────────────────────────────── */
         @media (max-width: 768px) {
@@ -179,8 +226,9 @@ export default function LandingPage() {
           .cta-section { padding:4rem 0; }
 
           /* Footer */
-          .footer-inner { flex-direction:column; align-items:flex-start; gap:12px; }
-          .footer-links { flex-wrap:wrap; gap:16px; }
+          .footer-inner { grid-template-columns:1fr; }
+          .footer-cols { gap:1.5rem; }
+          .footer-bottom { flex-direction:column; align-items:flex-start; }
         }
 
         @media (max-width: 480px) {
@@ -193,10 +241,12 @@ export default function LandingPage() {
       {/* Nav */}
       <nav className="nav">
         <div className="container nav-inner">
-          <span className="logo">Renderly</span>
+          <a href="/" className="logo" style={{textDecoration:'none'}}>Renderly</a>
           <div className="nav-links">
             <a href="/docs" className="nav-link">Docs</a>
             <a href="/pricing" className="nav-link">Pricing</a>
+            <a href="/changelog" className="nav-link">Changelog</a>
+            <a href="mailto:hello@renderlyapi.com" className="nav-link">Talk to us</a>
             <a href="/auth/login" className="btn btn-secondary" style={{padding:'7px 16px',fontSize:14}}>Sign in</a>
             <a href="/auth/register" className="btn btn-primary" style={{padding:'7px 16px',fontSize:14}}>Get started free</a>
           </div>
@@ -221,6 +271,7 @@ export default function LandingPage() {
           <div className="hero-ctas">
             <a href="/auth/register" className="btn btn-primary" style={{fontSize:16,padding:'14px 30px'}}>Start for free →</a>
             <a href="/docs" className="btn btn-secondary" style={{fontSize:16,padding:'14px 30px'}}>Read the docs</a>
+            <a href="mailto:hello@renderlyapi.com?subject=Renderly demo request" className="btn btn-secondary" style={{fontSize:16,padding:'14px 30px'}}>Book a demo</a>
           </div>
 
           {/* Visual demo */}
@@ -304,19 +355,7 @@ export default function LandingPage() {
       {/* Stats */}
       <section className="stats-bar">
         <div className="container">
-          <div className="stats-grid">
-            {[
-              {num:'< 200ms', label:'Average render time'},
-              {num:'99.9%',   label:'API uptime SLA'},
-              {num:'A4 + Letter', label:'Page format support'},
-              {num:'Free',    label:'To get started'},
-            ].map(s => (
-              <div className="stat" key={s.label}>
-                <div className="stat-num">{s.num}</div>
-                <div className="stat-label">{s.label}</div>
-              </div>
-            ))}
-          </div>
+          <LiveStats />
         </div>
       </section>
 
@@ -414,14 +453,57 @@ export default function LandingPage() {
 
       {/* Footer */}
       <footer className="footer">
-        <div className="container footer-inner">
-          <span className="logo" style={{fontSize:16}}>Renderly</span>
-          <div className="footer-links">
-            {[['Docs','/docs'],['Pricing','/pricing'],['Sign in','/auth/login'],['Register','/auth/register']].map(([l,h])=>(
-              <a key={l} href={h} className="footer-link">{l}</a>
-            ))}
+        <div className="container">
+          <div className="footer-inner">
+            <div className="footer-brand">
+              <a href="/" className="logo" style={{fontSize:16,textDecoration:'none'}}>Renderly</a>
+              <p className="footer-tagline">HTML to PDF API.<br/>Built on Chromium.</p>
+            </div>
+            <div className="footer-cols">
+              <div className="footer-col">
+                <h4>Product</h4>
+                <div className="footer-col-links">
+                  <a href="/docs" className="footer-link">Documentation</a>
+                  <a href="/pricing" className="footer-link">Pricing</a>
+                  <a href="/changelog" className="footer-link">Changelog</a>
+                  <a href="mailto:hello@renderlyapi.com?subject=Renderly demo request" className="footer-link">Book a demo</a>
+                </div>
+              </div>
+              <div className="footer-col">
+                <h4>Compare</h4>
+                <div className="footer-col-links">
+                  <a href="/puppeteer-alternative" className="footer-link">vs Puppeteer</a>
+                  <a href="/wkhtmltopdf-alternative" className="footer-link">vs wkhtmltopdf</a>
+                  <a href="/weasyprint-alternative" className="footer-link">vs WeasyPrint</a>
+                </div>
+              </div>
+              <div className="footer-col">
+                <h4>Use cases</h4>
+                <div className="footer-col-links">
+                  <a href="/use-cases/invoices" className="footer-link">PDF Invoices</a>
+                  <a href="/use-cases/reports" className="footer-link">PDF Reports</a>
+                  <a href="/use-cases/certificates" className="footer-link">Certificates</a>
+                  <a href="/use-cases/contracts" className="footer-link">Contracts</a>
+                </div>
+              </div>
+              <div className="footer-col">
+                <h4>Languages</h4>
+                <div className="footer-col-links">
+                  <a href="/pdf-api/nodejs" className="footer-link">Node.js</a>
+                  <a href="/pdf-api/python" className="footer-link">Python</a>
+                  <a href="/pdf-api/php" className="footer-link">PHP</a>
+                  <a href="/pdf-api/go" className="footer-link">Go</a>
+                </div>
+              </div>
+            </div>
           </div>
-          <span style={{fontSize:12,color:'#334155'}}>© 2026 Renderly</span>
+          <div className="footer-bottom">
+            <span style={{fontSize:12,color:'#334155'}}>© 2026 Renderly</span>
+            <a href="https://stats.uptimerobot.com/renderlyapi" target="_blank" rel="noopener" className="status-badge">
+              <span className="status-dot"/>
+              All systems operational
+            </a>
+          </div>
         </div>
       </footer>
     </>
