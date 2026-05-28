@@ -120,7 +120,7 @@ export default function FAQSection() {
                 <div className={`faq-answer${open === i ? ' open' : ''}`} aria-hidden={open !== i}>
                   <div className="faq-answer-inner">
                     {i === FAQS.length - 1
-                      ? <>{item.a.replace('the Docs', '')}<a href="/docs">the Docs</a>.</>
+                      ? <>The complete API reference — including all request parameters, response formats, error codes, and code examples in JavaScript, Python, PHP, and curl — is in <a href="/docs">the Docs</a>.</>
                       : item.a
                     }
                   </div>
