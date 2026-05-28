@@ -1,3 +1,5 @@
+import FAQSection from './components/FAQSection';
+
 export default function LandingPage() {
   return (
     <>
@@ -394,6 +396,9 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
+
+      {/* FAQ */}
+      <FAQSection />
 
       {/* CTA */}
       <section className="cta-section">
