@@ -121,6 +121,71 @@ export default function LandingPage() {
         .footer-links { display:flex;gap:24px; }
         .footer-link { font-size:13px;color:#475569;text-decoration:none;transition:color 0.2s; }
         .footer-link:hover { color:#94A3B8; }
+
+        /* ── Mobile ────────────────────────────────────── */
+        @media (max-width: 768px) {
+          .container { padding:0 1rem; }
+
+          /* Nav — hide docs link, shrink buttons */
+          .nav-link { display:none; }
+          .nav-inner { gap:8px; }
+          .btn-secondary[href="/auth/login"] { display:none; }
+          .btn-primary[href="/auth/register"] { padding:7px 14px !important; font-size:13px !important; }
+
+          /* Hero */
+          .hero { padding:3.5rem 0 2.5rem; }
+          .hero h1 { font-size:clamp(34px,10vw,52px); letter-spacing:-1px; }
+          .hero-sub { font-size:16px; }
+          .hero-ctas { flex-direction:column; align-items:center; }
+          .hero-ctas .btn { width:100%; max-width:320px; justify-content:center; }
+
+          /* Demo visual — stack vertically */
+          .demo-visual {
+            grid-template-columns: 1fr !important;
+            max-width:100%;
+          }
+          .arrow-col {
+            flex-direction:row !important;
+            justify-content:center;
+            padding:4px 0;
+          }
+          .arrow-line {
+            width:30px !important;
+            height:2px !important;
+            background:linear-gradient(to right,rgba(99,102,241,0.6),transparent) !important;
+          }
+          .arrow-badge { font-size:11px; padding:8px 14px; }
+          div[style*="color:'#6366F1'"][style*="fontSize:20"] { transform:rotate(90deg); }
+
+          /* Stats */
+          .stats-grid { gap:2rem; }
+          .stat-num { font-size:26px; }
+
+          /* Steps */
+          .steps { grid-template-columns:1fr !important; }
+
+          /* Features */
+          .features-grid { grid-template-columns:1fr !important; }
+
+          /* Pricing */
+          .pricing-grid { grid-template-columns:1fr !important; }
+
+          /* Section titles */
+          .section-title { font-size:26px; }
+
+          /* CTA */
+          .cta-section { padding:4rem 0; }
+
+          /* Footer */
+          .footer-inner { flex-direction:column; align-items:flex-start; gap:12px; }
+          .footer-links { flex-wrap:wrap; gap:16px; }
+        }
+
+        @media (max-width: 480px) {
+          .demo-code { font-size:11px; padding:14px; }
+          .pdf-body { padding:14px; }
+          .pricing-price { font-size:28px; }
+        }
       `}</style>
 
       {/* Nav */}

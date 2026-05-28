@@ -71,7 +71,7 @@ export default async function DashboardPage() {
               <p style={{ fontSize:13, color:'var(--text-muted)' }}>More PDFs, higher limits, priority rendering</p>
             </div>
           </a>
-          <a href="https://docs.renderly.dev" target="_blank" rel="noreferrer" style={{ textDecoration:'none' }}>
+          <a href="https://docs.renderlyapi.com" target="_blank" rel="noreferrer" style={{ textDecoration:'none' }}>
             <div className="card" style={{ cursor:'pointer' }}>
               <p style={{ fontWeight:600, marginBottom:4 }}>Documentation</p>
               <p style={{ fontSize:13, color:'var(--text-muted)' }}>API reference, quickstart, code examples</p>
@@ -83,14 +83,14 @@ export default async function DashboardPage() {
         <div className="card">
           <p style={{ fontWeight:600, marginBottom:12 }}>Quick start</p>
           <pre style={{ background:'#0F172A', color:'#E2E8F0', borderRadius:'var(--radius)', padding:'1rem', fontSize:12, overflowX:'auto', lineHeight:1.7 }}>
-{`curl -X POST https://api.renderly.dev/v1/pdf/from-html \\
+{`curl -X POST https://api.renderlyapi.com/v1/pdf/from-html \\
   -H "Authorization: Bearer YOUR_API_KEY" \\
   -H "Content-Type: application/json" \\
   -d '{"html":"<h1>Hello, Renderly!</h1>"}' \\
   --output hello.pdf`}
           </pre>
           <p style={{ marginTop:12, fontSize:13, color:'var(--text-muted)' }}>
-            Full API reference → <a href="https://docs.renderly.dev">docs.renderly.dev</a>
+            Full API reference → <a href="https://docs.renderlyapi.com">docs.renderlyapi.com</a>
           </p>
         </div>
       </div>
