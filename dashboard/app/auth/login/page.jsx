@@ -3,10 +3,35 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
+const authStyle = `
+  html, body { background:#020817 !important; color:#F8FAFC !important; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:'Inter',system-ui,-apple-system,sans-serif; background:#020817; color:#F8FAFC; }
+  .wrap { min-height:100vh; display:flex; align-items:center; justify-content:center; padding:1.5rem; }
+  .box { width:100%; max-width:400px; }
+  .logo-row { text-align:center; margin-bottom:2rem; }
+  .logo { font-weight:800; font-size:24px; background:linear-gradient(135deg,#818CF8,#C084FC); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+  .tagline { font-size:14px; color:#475569; margin-top:6px; }
+  .card { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:16px; padding:1.75rem; }
+  .form { display:flex; flex-direction:column; gap:16px; }
+  .field { display:flex; flex-direction:column; gap:6px; }
+  .label { font-size:13px; font-weight:500; color:#94A3B8; }
+  input { padding:10px 14px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:8px; font-size:14px; color:#F8FAFC; outline:none; width:100%; transition:border-color .2s; }
+  input::placeholder { color:#334155; }
+  input:focus { border-color:rgba(99,102,241,0.6); box-shadow:0 0 0 3px rgba(99,102,241,0.12); }
+  .btn-submit { display:flex; align-items:center; justify-content:center; width:100%; padding:11px 20px; background:linear-gradient(135deg,#6366F1,#8B5CF6); color:#fff; border:none; border-radius:10px; font-size:14px; font-weight:600; cursor:pointer; box-shadow:0 0 20px rgba(99,102,241,0.3); transition:all .2s; }
+  .btn-submit:hover:not(:disabled) { transform:translateY(-1px); box-shadow:0 0 28px rgba(99,102,241,0.45); }
+  .btn-submit:disabled { opacity:0.6; cursor:not-allowed; }
+  .error { background:rgba(220,38,38,0.08); border:1px solid rgba(220,38,38,0.2); border-radius:8px; padding:10px 14px; font-size:13px; color:#FCA5A5; }
+  .footer-link { text-align:center; margin-top:16px; font-size:13px; color:#475569; }
+  .footer-link a { color:#818CF8; text-decoration:none; }
+  .footer-link a:hover { text-decoration:underline; }
+`;
+
 export default function LoginPage() {
   const router = useRouter();
-  const [form, setForm]     = useState({ email: '', password: '' });
-  const [error, setError]   = useState('');
+  const [form, setForm]       = useState({ email: '', password: '' });
+  const [error, setError]     = useState('');
   const [loading, setLoading] = useState(false);
 
   async function handleSubmit(e) {
@@ -29,38 +54,37 @@ export default function LoginPage() {
   }
 
   return (
-    <div style={{ minHeight:'100vh', display:'flex', alignItems:'center', justifyContent:'center', background:'var(--grey-bg)' }}>
-      <div style={{ width:'100%', maxWidth:400, padding:'0 1rem' }}>
-        <div style={{ textAlign:'center', marginBottom:'2rem' }}>
-          <h1 style={{ fontSize:28, fontWeight:700, color:'var(--blue)' }}>Renderly</h1>
-          <p style={{ color:'var(--text-muted)', marginTop:4 }}>Sign in to your account</p>
-        </div>
-        <div className="card">
-          <form onSubmit={handleSubmit} style={{ display:'flex', flexDirection:'column', gap:16 }}>
-            {error && (
-              <div style={{ padding:'10px 14px', background:'#FEF2F2', border:'1px solid #FECACA', borderRadius:'var(--radius)', color:'var(--danger)', fontSize:14 }}>
-                {error}
+    <>
+      <style>{authStyle}</style>
+      <div className="wrap">
+        <div className="box">
+          <div className="logo-row">
+            <div className="logo">Renderly</div>
+            <p className="tagline">Sign in to your account</p>
+          </div>
+          <div className="card">
+            <form className="form" onSubmit={handleSubmit}>
+              {error && <div className="error">{error}</div>}
+              <div className="field">
+                <label className="label">Email</label>
+                <input type="email" required placeholder="you@example.com"
+                  value={form.email} onChange={e => setForm(f => ({...f, email: e.target.value}))} />
               </div>
-            )}
-            <div>
-              <label style={{ display:'block', fontSize:13, fontWeight:500, marginBottom:6 }}>Email</label>
-              <input type="email" required placeholder="you@example.com"
-                value={form.email} onChange={e => setForm(f => ({...f, email: e.target.value}))} />
-            </div>
-            <div>
-              <label style={{ display:'block', fontSize:13, fontWeight:500, marginBottom:6 }}>Password</label>
-              <input type="password" required placeholder="••••••••"
-                value={form.password} onChange={e => setForm(f => ({...f, password: e.target.value}))} />
-            </div>
-            <button type="submit" className="btn btn-primary" disabled={loading} style={{ width:'100%', justifyContent:'center' }}>
-              {loading ? 'Signing in…' : 'Sign in'}
-            </button>
-          </form>
+              <div className="field">
+                <label className="label">Password</label>
+                <input type="password" required placeholder="••••••••"
+                  value={form.password} onChange={e => setForm(f => ({...f, password: e.target.value}))} />
+              </div>
+              <button type="submit" className="btn-submit" disabled={loading}>
+                {loading ? 'Signing in…' : 'Sign in'}
+              </button>
+            </form>
+          </div>
+          <p className="footer-link">
+            No account? <a href="/auth/register">Sign up free →</a>
+          </p>
         </div>
-        <p style={{ textAlign:'center', marginTop:16, fontSize:14, color:'var(--text-muted)' }}>
-          No account? <a href="/auth/register">Sign up free</a>
-        </p>
       </div>
-    </div>
+    </>
   );
 }
