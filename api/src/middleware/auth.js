@@ -1,6 +1,6 @@
 'use strict';
 
-const bcrypt  = require('bcrypt');
+const bcrypt  = require('bcryptjs');
 const { getOne, query } = require('../db/client');
 const { apiError } = require('../utils/errors');
 
@@ -22,14 +22,11 @@ async function requireApiKey(req, reply) {
 
   // Find active keys that share the same prefix (first 16 chars)
   const prefix = rawKey.slice(0, 16);
-  req.log.info({ prefix, keyLen: rawKey.length }, '[auth] looking up key');
   const candidates = await getCandidateKeys(prefix);
-  req.log.info({ candidateCount: candidates.length }, '[auth] candidates found');
 
   let matchedKey = null;
   for (const candidate of candidates) {
     const match = await bcrypt.compare(rawKey, candidate.key_hash);
-    req.log.info({ match }, '[auth] bcrypt compare result');
     if (match) { matchedKey = candidate; break; }
   }
 

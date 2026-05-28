@@ -3,7 +3,7 @@
 // User registration and login for the dashboard.
 // The API itself uses API keys — this is only for the web dashboard auth.
 
-const bcrypt  = require('bcrypt');
+const bcrypt  = require('bcryptjs');
 const { nanoid } = require('nanoid');
 const { query, getOne } = require('../db/client');
 const { apiError }      = require('../utils/errors');
