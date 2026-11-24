@@ -1,22 +1,10 @@
-# Renderly — HTML to PDF API
+# Renderly: HTML to PDF API
 
 > POST your HTML. Get a pixel-perfect PDF back. Dead-simple, developer-friendly, priced for builders.
 
 ---
 
-## Copy this project to your Desktop
-
-Open **Terminal** and run this single command:
-
-```bash
-cp -r ~/Documents/Claude/Projects/FBA/renderly ~/Desktop/Renderly
-```
-
-Your project will appear as a **Renderly** folder on your Desktop. You can then open it in VS Code:
-
-```bash
-code ~/Desktop/Renderly
-```
+Live at [renderlyapi.com](https://renderlyapi.com).
 
 ---
 
@@ -58,11 +46,11 @@ renderly/
 - PostgreSQL 15+ (local install or Docker)
 - A free [Stripe account](https://stripe.com) (test mode is fine)
 
-### 1. Clone / move to your working directory
+### 1. Clone the repository
 
 ```bash
-# If you ran the Desktop copy above, navigate there:
-cd ~/Desktop/Renderly
+git clone https://github.com/diogoberger/renderly.git
+cd renderly
 ```
 
 ### 2. Set up the API
@@ -151,7 +139,7 @@ curl -X POST http://localhost:3001/v1/pdf/from-html \
   -d '{"html":"<h1>Hello, Renderly!</h1>"}' \
   --output hello.pdf
 
-open hello.pdf   # macOS — opens the PDF
+open hello.pdf   # macOS: opens the PDF
 ```
 
 ---
@@ -178,7 +166,7 @@ Tests use Node's built-in test runner (no Jest required). The suite covers:
 2. Create a new Railway project → **Deploy from GitHub**
 3. Add a PostgreSQL service (Railway auto-sets `DATABASE_URL`)
 4. Set all environment variables from `.env.example` in the Railway dashboard
-5. Railway picks up `railway.json` automatically — deploys the Dockerfile
+5. Railway picks up `railway.json` automatically and builds with Nixpacks (`api/nixpacks.toml`)
 
 **Important:** Set the Stripe webhook endpoint in the Stripe dashboard to:
 ```
@@ -191,7 +179,7 @@ https://YOUR_RAILWAY_URL/v1/webhooks/stripe
 2. Set environment variables:
    - `NEXT_PUBLIC_API_URL` → your Railway API URL
    - `JWT_SECRET` → a strong random secret
-3. Deploy — Vercel picks up `vercel.json` automatically
+3. Deploy: Vercel picks up `vercel.json` automatically
 
 ---
 
